@@ -21,6 +21,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, phone, password, **extra_fields)
 
+
 class User(AbstractUser):
     ID_TYPES = (
         ('email', 'Email'),

@@ -1,0 +1,75 @@
+{
+    "info": {
+      "name": "Django Auth API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "SignUp",
+        "request": {
+          "method": "POST",
+          "header": [
+            {"key": "Content-Type", "value": "application/json"}
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"id_type\": \"email\",\n    \"email\": \"user@example.com\",\n    \"password\": \"strongpassword123\"\n}"
+          },
+          "url": "{{base_url}}/api/signup/"
+        }
+      },
+      {
+        "name": "SignIn",
+        "request": {
+          "method": "POST",
+          "header": [
+            {"key": "Content-Type", "value": "application/json"}
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"id\": \"user@example.com\",\n    \"password\": \"strongpassword123\"\n}"
+          },
+          "url": "{{base_url}}/api/signin/"
+        }
+      },
+      {
+        "name": "User Info",
+        "request": {
+          "method": "GET",
+          "header": [
+            {"key": "Authorization", "value": "Bearer {{access_token}}"}
+          ],
+          "url": "{{base_url}}/api/info/"
+        }
+      },
+      {
+        "name": "Network Latency",
+        "request": {
+          "method": "GET",
+          "header": [
+            {"key": "Authorization", "value": "Bearer {{access_token}}"}
+          ],
+          "url": "{{base_url}}/api/latency/"
+        }
+      },
+      {
+        "name": "Logout",
+        "request": {
+          "method": "POST",
+          "header": [
+            {"key": "Authorization", "value": "Bearer {{access_token}}"},
+            {"key": "Content-Type", "value": "application/json"}
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"all\": false\n}"
+          },
+          "url": "{{base_url}}/api/logout/"
+        }
+      }
+    ],
+    "variable": [
+      {"key": "base_url", "value": "http://localhost:8000"},
+      {"key": "access_token", "value": ""}
+    ]
+}

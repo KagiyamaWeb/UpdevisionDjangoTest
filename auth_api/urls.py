@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (
+from auth_api.views import (
     SignUpView,
     SignInView,
     UserInfoView,
