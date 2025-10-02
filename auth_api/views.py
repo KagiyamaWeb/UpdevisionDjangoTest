@@ -8,9 +8,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from auth_api.models import User
 from auth_api.serializers import UserRegistrationSerializer, UserLoginSerializer
+from rest_framework import permissions
 
 
 class SignUpView(APIView):
+    permission_classes = [permissions.AllowAny]
+
     def post(self, request):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
@@ -28,6 +31,8 @@ class SignUpView(APIView):
 
 
 class SignInView(APIView):
+    permission_classes = [permissions.AllowAny]
+
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -43,6 +48,8 @@ class SignInView(APIView):
 
 
 class UserInfoView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request):
         user = request.user
         return Response({
@@ -52,17 +59,10 @@ class UserInfoView(APIView):
 
 
 class LatencyView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request):
         start_time = time.time()
         requests.get('https://ya.ru')
         latency = int((time.time() - start_time) * 1000)
         return Response({'latency': f'{latency}ms'})
-
-
-class LogoutView(APIView):
-    def post(self, request):
-        if request.data.get('all'):
-            request.user.auth_token_set.all().delete()
-        else:
-            request.auth.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)

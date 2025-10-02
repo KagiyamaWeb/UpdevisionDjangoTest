@@ -51,21 +51,6 @@
           ],
           "url": "{{base_url}}/api/latency/"
         }
-      },
-      {
-        "name": "Logout",
-        "request": {
-          "method": "POST",
-          "header": [
-            {"key": "Authorization", "value": "Bearer {{access_token}}"},
-            {"key": "Content-Type", "value": "application/json"}
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n    \"all\": false\n}"
-          },
-          "url": "{{base_url}}/api/logout/"
-        }
       }
     ],
     "variable": [
